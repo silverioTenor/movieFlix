@@ -27,7 +27,7 @@ export default class Person {
   public nationality: string;
 
   @Column()
-  public papel: string;
+  public papel: 'actor' | 'author';
 
   @Column()
   public job: string;

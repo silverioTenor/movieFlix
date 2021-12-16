@@ -20,7 +20,7 @@ export default class Movie {
   @Column()
   public duration: number;
 
-  @Column()
+  @Column('time without time zone')
   public release: Date;
 
   @Column()
