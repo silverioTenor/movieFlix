@@ -48,6 +48,16 @@ export default class CreatePerson1639696544961 implements MigrationInterface {
             default: 'now()',
           },
         ],
+        foreignKeys: [
+          {
+            name: 'person_movie_id_fkey',
+            columnNames: ['movie_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'movie',
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
+          },
+        ],
       }),
     );
   }

@@ -52,6 +52,16 @@ export default class CreateMovie1639696051740 implements MigrationInterface {
             default: 'now()',
           },
         ],
+        foreignKeys: [
+          {
+            name: 'movie_category_id_fkey',
+            columnNames: ['category_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'category',
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
+          },
+        ],
       }),
     );
   }
