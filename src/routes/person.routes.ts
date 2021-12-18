@@ -113,4 +113,20 @@ personRouter.put('/:id', async (request, response) => {
   return response.json(person);
 });
 
+personRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const repository = getRepository(Person);
+
+  const person = await repository.findOne({ where: { id } });
+
+  if (!person) {
+    throw new AppError('Person not found!', 404);
+  }
+
+  await repository.delete(id);
+
+  return response.status(204).json();
+});
+
 export default personRouter;
