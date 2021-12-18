@@ -40,8 +40,8 @@ export default class Movie {
   public link: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  public created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  public updated_at: Date;
 }

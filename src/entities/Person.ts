@@ -37,8 +37,8 @@ export default class Person {
   public movie: Movie[];
 
   @CreateDateColumn()
-  created_at: Date;
+  public created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  public updated_at: Date;
 }
