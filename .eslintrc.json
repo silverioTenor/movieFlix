@@ -22,6 +22,7 @@
     "class-methods-use-this": "off",
     "camelcase": "off",
     "no-param-reassign": "off",
+    "no-unneeded-ternary": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

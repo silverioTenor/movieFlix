@@ -29,11 +29,8 @@ export default class Person {
   @Column()
   public papel: 'actor' | 'author';
 
-  @Column()
-  public job: string;
-
-  @Column()
-  public movie_id: string;
+  @Column('uuid', { array: true })
+  public movie_id: string[];
 
   @ManyToMany(() => Movie)
   @JoinColumn({ name: 'movie_id' })

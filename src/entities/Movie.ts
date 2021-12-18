@@ -28,7 +28,7 @@ export default class Movie {
 
   @ManyToMany(() => Category)
   @JoinColumn({ name: 'category_id' })
-  public category: Category[];
+  public category: Category;
 
   @Column()
   public age_group: number;

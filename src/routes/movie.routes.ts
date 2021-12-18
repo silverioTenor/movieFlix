@@ -13,7 +13,9 @@ movieRouter.get('/', async (request, response) => {
   let movies = await repository.find();
 
   const moviePormise = movies.map(async movie => {
-    movie.category = await categoryRepository.find({ where: { id: movie.category_id } });
+    const category = await categoryRepository.findOne({ where: { id: movie.category_id } });
+
+    movie.category = category ? category : ({} as Category);
 
     return movie;
   });
@@ -54,7 +56,7 @@ movieRouter.post('/', async (request, response) => {
 
   await repository.save(movie);
 
-  movie.category = [category];
+  movie.category = category;
 
   return response.json(movie);
 });
@@ -87,7 +89,7 @@ movieRouter.put('/:id', async (request, response) => {
 
   await repository.save(movie);
 
-  movie.category = category ? [category] : [];
+  movie.category = category ? category : ({} as Category);
 
   return response.json(movie);
 });
