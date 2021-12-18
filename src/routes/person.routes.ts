@@ -71,4 +71,46 @@ personRouter.post('/', async (request, response) => {
   return response.json(person);
 });
 
+personRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const { name, age, genre, nationality, papel, movie_id } = request.body;
+
+  const repository = getRepository(Person);
+
+  const person = await repository.findOne({ where: { id } });
+
+  if (!person) {
+    throw new AppError('Person not found!', 404);
+  }
+
+  const movieIdArray = new Set([...person.movie_id, ...movie_id]);
+
+  Object.assign(person, {
+    name,
+    age,
+    genre,
+    nationality,
+    papel,
+    movie_id: [...movieIdArray],
+  });
+
+  await repository.save(person);
+
+  const movieRepository = getRepository(Movie);
+
+  const movies = new Set([] as Movie[]);
+
+  for await (const mId of movieIdArray) {
+    const movie = await movieRepository.findOne({ where: { id: mId }, relations: ['category'] });
+
+    if (movie) {
+      movies.add(movie);
+    }
+  }
+
+  person.movie = [...movies];
+
+  return response.json(person);
+});
+
 export default personRouter;

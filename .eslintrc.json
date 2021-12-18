@@ -23,6 +23,7 @@
     "camelcase": "off",
     "no-param-reassign": "off",
     "no-unneeded-ternary": "off",
+    "no-restricted-syntax": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
