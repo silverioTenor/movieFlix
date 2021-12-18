@@ -7,7 +7,35 @@ import AppError from '../errors/AppError';
 const personRouter = Router();
 
 personRouter.get('/', async (request, response) => {
-  return response.json({ message: 'Thats okay!' });
+  const repository = getRepository(Person);
+  const movieRepository = getRepository(Movie);
+
+  let persons = await repository.find();
+
+  if (persons) {
+    const personsPromise = persons.map(async person => {
+      const moviesPromise = person.movie_id.map(mId => {
+        const moviePromise = movieRepository.find({
+          where: { id: mId },
+          relations: ['category'],
+        });
+
+        return moviePromise;
+      });
+
+      const moviesMatrix = await Promise.all(moviesPromise);
+
+      const [movies] = moviesMatrix;
+
+      person.movie = movies;
+
+      return person;
+    });
+
+    persons = await Promise.all(personsPromise);
+  }
+
+  return response.json(persons);
 });
 
 personRouter.post('/', async (request, response) => {
