@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -26,7 +26,7 @@ export default class Movie {
   @Column()
   public category_id: string;
 
-  @ManyToMany(() => Category)
+  @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   public category: Category;
 
