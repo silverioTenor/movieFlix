@@ -9,17 +9,17 @@ import {
 @Entity()
 export default class Category {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  public id: string;
 
   @Column()
-  name: string;
+  public name: string;
 
   @Column()
-  description: string;
+  public description: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  public created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  public updated_at: Date;
 }

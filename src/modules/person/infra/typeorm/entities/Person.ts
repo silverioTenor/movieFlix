@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Movie from './Movie';
+import Movie from '@modules/movie/infra/typeorm/entities/Movie';
 
 @Entity()
 export default class Person {
@@ -37,8 +37,8 @@ export default class Person {
   public movie: Movie[];
 
   @CreateDateColumn()
-  created_at: Date;
+  public created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  public updated_at: Date;
 }
