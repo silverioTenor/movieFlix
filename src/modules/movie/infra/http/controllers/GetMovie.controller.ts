@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Category from '../entities/Category';
-import Movie from '../entities/Movie';
+
+import Category from '@modules/category/infra/typeorm/entities/Category';
+import Movie from '@modules/movie/infra/typeorm/entities/Movie';
 
 export default class GetMovieController {
   public static async handle(request: Request, response: Response): Promise<Response> {

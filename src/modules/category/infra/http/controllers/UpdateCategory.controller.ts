@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Category from '../entities/Category';
-import AppError from '../errors/AppError';
+
+import AppError from '@shared/errors/AppError';
+import Category from '@modules/category/infra/typeorm/entities/Category';
 
 export default class UpdateCategoryController {
   public static async handle(request: Request, response: Response): Promise<Response> {

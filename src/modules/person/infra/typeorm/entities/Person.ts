@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Movie from './Movie';
+import Movie from '@modules/movie/infra/typeorm/entities/Movie';
 
 @Entity()
 export default class Person {

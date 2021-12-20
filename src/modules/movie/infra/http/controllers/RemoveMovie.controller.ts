@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Movie from '../entities/Movie';
-import AppError from '../errors/AppError';
+
+import AppError from '@shared/errors/AppError';
+import Movie from '@modules/movie/infra/typeorm/entities/Movie';
 
 export default class RemoveMovieController {
   public static async handle(request: Request, response: Response): Promise<Response> {

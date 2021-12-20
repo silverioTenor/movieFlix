@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Movie from '../entities/Movie';
-import Person from '../entities/Person';
-import AppError from '../errors/AppError';
+
+import AppError from '@shared/errors/AppError';
+import Movie from '@modules/movie/infra/typeorm/entities/Movie';
+import Person from '@modules/person/infra/typeorm/entities/Person';
 
 export default class CreatePersonController {
   public static async handle(request: Request, response: Response): Promise<Response> {

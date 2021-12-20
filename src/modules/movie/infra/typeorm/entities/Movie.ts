@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Category from './Category';
+import Category from '@modules/category/infra/typeorm/entities/Category';
 
 @Entity()
 export default class Movie {
