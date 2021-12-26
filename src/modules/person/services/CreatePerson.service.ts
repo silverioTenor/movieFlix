@@ -19,7 +19,7 @@ export default class CreatePersonService {
   public async run(personData: IPerson): Promise<Person> {
     this.person = await this.repository.findBy({ name: personData.name });
 
-    if (this.person) {
+    if (this.person && this.person.id) {
       throw new AppError('Person already exists!', 401);
     }
 
