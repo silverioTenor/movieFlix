@@ -1,36 +1,39 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import { container } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
 import Movie from '@modules/movie/infra/typeorm/entities/Movie';
-import Person from '@modules/person/infra/typeorm/entities/Person';
+import CreatePersonService from '@modules/person/services/CreatePerson.service';
 
 export default class CreatePersonController {
   public static async handle(request: Request, response: Response): Promise<Response> {
     const { name, age, genre, nationality, papel, movie_id } = request.body;
 
-    const repository = getRepository(Person);
+    const createPerson = container.resolve(CreatePersonService);
 
-    let person = await repository.findOne({ where: { name } });
-
-    if (person) {
-      throw new AppError('Person alreary exists!', 401);
-    }
-
-    person = repository.create({
+    const person = await createPerson.run({
       name,
       age,
       genre,
       nationality,
       papel,
-      movie_id: [movie_id],
+      movie_id,
     });
-
-    await repository.save(person);
 
     const movieRepository = getRepository(Movie);
 
-    const movies = await movieRepository.find({ where: { id: movie_id }, relations: ['category'] });
+    const moviesPromise = movie_id.map((mId: string) => {
+      const moviePromise = movieRepository.findOne({
+        where: { id: mId },
+        relations: ['category'],
+      });
+
+      return moviePromise;
+    });
+
+    const moviesMatrix = await Promise.all(moviesPromise);
+
+    const movies = moviesMatrix;
 
     if (movies) {
       person.movie = movies;

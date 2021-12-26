@@ -24,6 +24,10 @@
     "no-param-reassign": "off",
     "no-unneeded-ternary": "off",
     "no-restricted-syntax": "off",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-var-requires": 0,
+    "import/no-extraneous-dependencies": 0,
+    "array-callback-return": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
