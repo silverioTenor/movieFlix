@@ -20,8 +20,10 @@ export default class PersonRepository implements IPersonRepository {
     return this.persons;
   }
 
-  public async findBy(param: string | number | boolean): Promise<Person | undefined> {
-    this.person = await this.ormRepository.findOne({ where: { param } });
+  public async findBy(param: {
+    [key: string]: string | number | boolean;
+  }): Promise<Person | undefined> {
+    this.person = await this.ormRepository.findOne({ where: param });
 
     return this.person;
   }
